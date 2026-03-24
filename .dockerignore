@@ -1,0 +1,11 @@
+.git
+.gitignore
+*.md
+.github
+docs
+.env
+.streamlit/secrets.toml
+__pycache__
+*.pyc
+.vscode
+.idea

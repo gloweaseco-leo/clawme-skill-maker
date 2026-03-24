@@ -1,0 +1,46 @@
+name: ✨ 功能建议
+description: 提出新功能或改进建议
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        欢迎提出功能建议！描述越清晰，越有助于我们评估和实现。
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题/痛点
+      description: 你希望解决什么问题？
+      placeholder: 例如：每次都要手动复制 API Key，希望支持环境变量
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: 期望的方案
+      description: 你理想中的功能是怎样的？
+      placeholder: 能自动从环境变量读取 DEEPSEEK_API_KEY
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternative
+    attributes:
+      label: 备选方案
+      description: 是否有其他实现方式或折中方案？
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 对你而言的重要程度
+      options:
+        - 高（强烈需要）
+        - 中（有了会更好）
+        - 低（nice to have）
+    validations:
+      required: false

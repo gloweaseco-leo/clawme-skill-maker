@@ -1,0 +1,17 @@
+[theme]
+base = "dark"
+font = "sans serif"
+
+[theme.light]
+primaryColor = "#FF4B4B"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#262730"
+
+[theme.dark]
+primaryColor = "#FF4B4B"
+backgroundColor = "#0E1117"
+secondaryBackgroundColor = "#1A1D27"
+textColor = "#FAFAFA"
+
+# 勿在此设置 enableCORS=false，会与 XSRF 保护冲突并可能导致远程访问异常

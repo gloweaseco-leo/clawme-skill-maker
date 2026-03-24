@@ -1,0 +1,77 @@
+name: 🐛 Bug 报告
+description: 报告应用中的 Bug 或异常行为
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你花时间反馈问题！请尽可能填写以下信息。
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 简洁清晰地描述遇到的 Bug
+      placeholder: 例如：点击「下载 Skill」按钮时页面无响应
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 按顺序列出复现步骤
+      placeholder: |
+        1. 打开应用
+        2. 输入「帮我写一个总结 B 站动态的 Skill」
+        3. 回答完 4 个问题后点击下载
+        4. 页面无响应
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+      description: 你期望发生什么？
+      placeholder: 应该能正常下载 zip 文件
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      description: 实际发生了什么？
+      placeholder: 点击后无任何反应
+    validations:
+      required: true
+
+  - type: dropdown
+    id: env
+    attributes:
+      label: 运行环境
+      options:
+        - 本地运行（streamlit run app.py）
+        - Streamlit Community Cloud
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Python 版本
+      placeholder: 例如 3.10.12
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 其他信息
+      description: 截图、终端报错、浏览器控制台错误等
+      render: markdown
+    validations:
+      required: false

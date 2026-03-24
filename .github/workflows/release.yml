@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 获取版本号
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+
+      - name: 创建 Source 包（完整源码）
+        run: |
+          git archive --format=zip --output=clawme-skill-maker-${{ steps.version.outputs.VERSION }}-source.zip HEAD
+
+      - name: 创建 Dist 包（最小可运行）
+        run: |
+          mkdir dist-pkg
+          cp app.py requirements.txt README.md LICENSE VERSION dist-pkg/ 2>/dev/null || true
+          mkdir -p dist-pkg/.streamlit
+          cp .streamlit/config.toml .streamlit/secrets.toml.example dist-pkg/.streamlit/
+          cp Dockerfile DEPLOYMENT.md dist-pkg/ 2>/dev/null || true
+          cd dist-pkg && zip -r ../clawme-skill-maker-${{ steps.version.outputs.VERSION }}-dist.zip . && cd ..
+
+      - name: 创建 GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ steps.version.outputs.VERSION }}
+          body: |
+            ## 变更说明
+            详见 [CHANGELOG.md](https://github.com/gloweaseco-leo/clawme-skill-maker/blob/main/CHANGELOG.md)。
+
+            ## 下载
+            - **clawme-skill-maker-${{ steps.version.outputs.VERSION }}-source.zip**：完整源码，适用于 Fork 和二次开发
+            - **clawme-skill-maker-${{ steps.version.outputs.VERSION }}-dist.zip**：最小可运行包，适用于快速部署
+          files: |
+            clawme-skill-maker-${{ steps.version.outputs.VERSION }}-source.zip
+            clawme-skill-maker-${{ steps.version.outputs.VERSION }}-dist.zip
+          draft: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
